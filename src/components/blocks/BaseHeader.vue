@@ -4,13 +4,27 @@
             <input type="text" v-model="searchText">
             <button>Search</button>
         </form>
-        <div v-for="movie in shared.SharedFilms" :key="movie.id">{{movie.title}}</div>
+        <div class="film" v-for="movie in shared.SharedFilms" :key="movie.id">
+            <div>
+                Titolo: {{movie.title}}
+            </div>
+            <div>
+                Titolo originale: {{movie.original_title}}
+            </div>
+            <div>
+                Lingua: {{movie.original_language}}
+            </div>
+            <div>
+                Voto: {{movie.vote_average}}
+            </div>
+        </div>
+        
     </header>
 </template>
 
 <script>
 import shared from '../../shared/data.js'
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
     name: 'BaseHeader',
@@ -39,8 +53,11 @@ export default {
         }
     }
 }
+
 </script>
 
 <style lang="scss" scoped>
-
+.film {
+    margin: 20px;
+}
 </style>
