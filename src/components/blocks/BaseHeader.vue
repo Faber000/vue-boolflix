@@ -6,7 +6,7 @@
         </form>
         <div class="results">
 
-            <h1>Film</h1>
+            <h1 v-if="FilmVisible">Film</h1>
             <div class="film" v-for="movie in shared.SharedFilms" :key="movie.id">
                 <div>
                     Titolo: {{movie.title}}
@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <h1>Serie Tv</h1>
+            <h1 v-if="SeriesVisible">Serie Tv</h1>
             <div class="serie" v-for="serie in shared.SharedtvSeries" :key="serie.id">
                 <div>
                     Titolo: {{serie.name}}
@@ -51,6 +51,8 @@ export default {
         return {
             searchText: '',
             shared,
+            FilmVisible: false,
+            SeriesVisible: false,
         }
     },
 
@@ -66,6 +68,7 @@ export default {
                     }
                 ).then((response) => {
                     shared.SharedFilms = response.data.results;
+                    this.FilmVisible = true;
                 }).catch((error) => {
                     console.log(error);
                 })
@@ -80,6 +83,7 @@ export default {
                     }
                 ).then((response) => {
                     shared.SharedtvSeries = response.data.results;
+                    this.SeriesVisible = true;
                 }).catch((error) => {
                     console.log(error);
                 })
