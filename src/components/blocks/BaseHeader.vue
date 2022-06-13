@@ -4,7 +4,7 @@
             <img class="logo" src="../../assets/img/logo.png" alt="">
 
             <form @submit.prevent="searching">
-                <input type="text" v-model="searchText">
+                <input class="mx-1" type="text" v-model="searchText">
                 <button class="btn btn-danger mx-2" >Search</button>
             </form>
         </nav>
