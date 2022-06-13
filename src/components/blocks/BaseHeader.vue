@@ -2,7 +2,7 @@
     <header class="header">
         <form @submit.prevent="searching">
             <input type="text" v-model="searchText">
-            <button>Search</button>
+            <button class="btn btn-dark mx-2" >Search</button>
         </form>
     </header>
 </template>

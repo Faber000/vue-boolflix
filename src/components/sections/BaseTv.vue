@@ -2,12 +2,14 @@
     <section>
         <h1>Serie Tv</h1>
         <div class="serie-container">
-            <div class="serie" v-for="(serie,index) in shared.SharedtvSeries" :key="serie.id">
-                <img class="serie-img" v-if="index<7" :src="makeUrl(serie.poster_path)" alt="">
+            <div class="serie" v-for="serie in shared.SharedtvSeries" :key="serie.id">
+                <img class="serie-img" :src="makeUrl(serie.poster_path)" alt="">
                 <div class="text-container">
                     <div>Titolo: {{serie.name}}</div>
                     <div>Titolo originale: {{serie.original_name}}</div>
-                    <div>Voto: {{serie.vote_average}}</div>
+                    <div class="stars-container">
+                        <div :key="index" v-for="(star,index) in stars(serie.vote_average)"><font-awesome-icon class="icon" icon="fa-solid fa-star"/></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,7 +33,17 @@ export default {
 
      methods: {
         makeUrl(url) {
-            return `https://image.tmdb.org/t/p/w185/${url}`
+            if(url == null) {
+                return `https://via.placeholder.com/185x280?text=No Image`
+            } else 
+
+            {
+                return `https://image.tmdb.org/t/p/w185/${url}`
+            }
+        },
+
+        stars(vote) {
+            return Math.floor(vote/2);
         }
     }
 }
@@ -46,12 +58,11 @@ section {
 
 .serie-container {
     display: flex;
-    margin-bottom: 30px;
 }
 
 .serie {
-    margin-right: 20px; 
     position: relative;   
+    margin-right: 20px;
 } 
 
 .serie-img {
@@ -71,7 +82,6 @@ section {
   left: 0;
   margin: auto;
   opacity: 0.7;
-  padding: 5px;
 }
 
 .text-container > div {
@@ -81,6 +91,14 @@ section {
 .text-container {
     display: none;
     color: white;
+}
+
+.stars-container {
+    display: flex;
+}
+
+.icon {
+    color: yellow;
 }
 
 </style>

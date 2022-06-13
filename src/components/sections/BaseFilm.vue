@@ -2,12 +2,14 @@
     <section>
         <h1>Film</h1>
         <div class="film-container">
-            <div class="film" v-for="(movie, index) in shared.SharedFilms" :key="movie.id">
-                <img class="film-img" v-if="index<7" :src="makeUrl(movie.poster_path)" alt="">
+            <div class="film" v-for="movie in shared.SharedFilms" :key="movie.id">
+                <img class="film-img" :src="makeUrl(movie.poster_path)" alt="">
                 <div class="text-container">
                     <div>Titolo: {{movie.title}}</div>
                     <div>Titolo originale: {{movie.original_title}}</div>
-                    <div>Voto: {{movie.vote_average}}</div>
+                    <div class="stars-container">
+                        <div :key="index" v-for="(star,index) in stars(movie.vote_average)"><font-awesome-icon class="icon" icon="fa-solid fa-star"/></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,9 +34,20 @@ export default {
 
     methods: {
         makeUrl(url) {
-            return `https://image.tmdb.org/t/p/w185/${url}`
+            if(url == null) {
+                return `https://via.placeholder.com/185x280?text=No image`
+            } else 
+
+            {
+                return `https://image.tmdb.org/t/p/w185/${url}`
+            }
+            
+        },
+
+        stars(vote) {
+            return Math.floor(vote/2);
         }
-    }
+    },
 }
 
 </script>
@@ -46,14 +59,13 @@ section {
 }
 
 .film-container {
-    margin-bottom: 30px;
     display: flex;
     position: relative;
 }
 
 .film {
-    margin-right: 20px;
     position: relative;
+    margin-right: 20px;
 }
 
 .film-img {
@@ -73,7 +85,6 @@ section {
   left: 0;
   margin: auto;
   opacity: 0.7;
-  padding: 5px;
 }
 
 .text-container > div {
@@ -83,5 +94,13 @@ section {
 .text-container {
     display: none;
     color: white;
+}
+
+.stars-container {
+    display: flex;
+}
+
+.icon {
+    color: yellow;
 }
 </style>

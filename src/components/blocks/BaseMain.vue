@@ -7,8 +7,8 @@
 
 <script>
 
-import BaseFilm from '../common/BaseFilm.vue'
-import BaseTv from '../common/BaseTv.vue'
+import BaseFilm from '../sections/BaseFilm.vue'
+import BaseTv from '../sections/BaseTv.vue'
 
 export default {
     name: 'BaseMain',
