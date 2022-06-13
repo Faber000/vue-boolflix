@@ -1,14 +1,19 @@
 <template>
     <section>
-        <h1>Film</h1>
-        <div class="film-container">
-            <div class="film" v-for="movie in shared.SharedFilms" :key="movie.id">
-                <img class="film-img" :src="makeUrl(movie.poster_path)" alt="">
-                <div class="text-container">
-                    <div>Titolo: {{movie.title}}</div>
-                    <div>Titolo originale: {{movie.original_title}}</div>
-                    <div class="stars-container">
-                        <div :key="index" v-for="(star,index) in stars(movie.vote_average)"><font-awesome-icon class="icon" icon="fa-solid fa-star"/></div>
+        <div v-if="shared.SharedFilms.length > 0" class="film-container container">
+            <h1>Film</h1>
+            <div class="row d-flex justify-content-center">
+                <div class="film col-lg-2 my-3" v-for="movie in shared.SharedFilms" :key="movie.id">
+                    <img class="film-img" :src="makeUrl(movie.poster_path)" alt="">
+                    <div class="text-container">
+                        <div>Titolo: {{movie.title}}</div>
+                        <div>Titolo originale: {{movie.original_title}}</div>
+                        <div>
+                            <lang-flag :iso="(movie.original_language)"/>
+                        </div>
+                        <div class="stars-container">
+                            <div :key="index" v-for="(star,index) in stars(movie.vote_average)"><font-awesome-icon class="icon" icon="fa-solid fa-star"/></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,13 +59,9 @@ export default {
 
 <style lang="scss" scoped>
 
-section {
-    margin: 20px;
-}
 
 .film-container {
-    display: flex;
-    position: relative;
+    text-align: center;
 }
 
 .film {
@@ -74,15 +75,15 @@ section {
 
 .film:hover .text-container{
   background-color: #000;
-  width: 100%;
+  width: 200px;
   height: 100%;
   display: block;
   position: absolute;
   content: "";
   top: 0;
-  right: 0;
   bottom: 0;
   left: 0;
+  right: 0;
   margin: auto;
   opacity: 0.7;
 }

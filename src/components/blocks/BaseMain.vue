@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="bg-dark">
         <BaseFilm/>
         <BaseTv/>
     </main>
@@ -21,4 +21,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+main {
+    min-height: calc(100vh - 80px);
+}
 </style>

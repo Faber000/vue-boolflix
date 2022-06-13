@@ -1,9 +1,13 @@
 <template>
     <header class="header">
-        <form @submit.prevent="searching">
-            <input type="text" v-model="searchText">
-            <button class="btn btn-dark mx-2" >Search</button>
-        </form>
+        <nav>
+            <img class="logo" src="../../assets/img/logo.png" alt="">
+
+            <form @submit.prevent="searching">
+                <input type="text" v-model="searchText">
+                <button class="btn btn-danger mx-2" >Search</button>
+            </form>
+        </nav>
     </header>
 </template>
 
@@ -58,8 +62,19 @@ export default {
 
 <style lang="scss" scoped>
 
-.header {
-    margin: 20px;
+
+nav {
+    height: 80px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.logo {
+    height: 100%;
+}
+
  
 </style>
